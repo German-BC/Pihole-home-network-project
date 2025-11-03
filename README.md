@@ -20,23 +20,33 @@ This project sets up and configures Pi-hole on a Raspberry Pi to provide network
    - Find the Pi under connected devices.
    - Reserve its LAN IP (to ensure its address remains consistent without configuring it on the Pi)
 6. In the router DNS settings, set Primary DNS to the Pi-hole IP.
-   - Optional: Add a Secondary DNS set to 0.0.0.0 to force all devices to use Pi-hole.
+
+## Screenshots
+
+### Pi-hole Dashboard
+
+![Pi-hole Dashboard](images/dashboard.png)
+
+### Router DHCP Reservation
+
+*(MAC addresses redacted for privacy)*
+![Router DHCP Reservation](images/dhcp-res.png)
+
+### Verifying Pi-hole DNS Blocking
+
+![DNS Test](images/nslookup.png)
   
-### Result
+## Result
 
 All devices on the home network now use DNS-level ad and tracking blocking. Additional device-level blockers (like uBlock Origin) can enhance results.
 
-### Future Improvements
+## Future Improvements
 
+- Use Docker to host multiple services alongside Pi-hole
 - Add Unbound for local recursive DNS to keep network independent of 3rd-party DNS providers
-- Add Tailscale for secure remote access to home network
-- Add PiVPN for secure personal VPN (WireGuard/OpenVPN)
+- Integrate VPN access for remote management
 
 ## NOTES
 
-### Why Use DHCP Reservation Instead of Static IP on the Pi?
-
-Assigning a static IP in the router ensures that:
-- The IP remains consistent even after reboots
-- The router is always aware of the device's IP assignment
-- Avoids potential IP conflicts if the router DHCP range changes
+- DHCP reservation on the router ensures that the Pi keeps a consistent IP address without manual static configuration on th Pi itself.
+- Pi-hole cannot block YouTube or in-app ads from Facebook, Instagram, etc. reliably due to how those apps serve content.
